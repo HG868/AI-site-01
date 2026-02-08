@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 防止百度转码 -->
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="applicable-device" content="pc,mobile">
+    <!-- 隐藏Referrer -->
+    <meta name="referrer" content="no-referrer">
+    <meta name="referrer" content="never">
+    <!-- SEO基础 -->
+    <title>AI一键改发色/换背景_智能物体移除工具_修图不求人 - 2026最新AI单品</title>
+    <meta name="description" content="想看自己换个发色的效果？照片里有路人想去掉？ImgUpscaler 智能AI编辑功能帮你一键解决。简单好用的AI单品工具，无需PS基础。扫码进入私域，免费解锁更多高级AI功能和定制化场景包。">
+    <meta name="keywords" content="AI换发色, 照片去路人, AI背景替换, 场景化AI工具, 社交媒体修图">
+    <link rel="icon" type="image/x-icon" href="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/favicon.ico">
+    <link rel="stylesheet" href="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/css2">
+    <link rel="stylesheet" href="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/entry.COUoWP31.css">
+    <link rel="stylesheet" href="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/default.QMKeKhb6.css">
+    <link rel="stylesheet" href="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/index.BbSQ0fH2.css">
+    
+    <!-- 弹窗样式 -->
+    <style>
+        /* ========== 弹窗组件样式 ========== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 1rem;
+            touch-action: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-overlay.hidden {
+            display: none;
+        }
+
+        .modal-container {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            width: 100%;
+            max-width: 32rem;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 0 auto;
+            position: relative;
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background-color: #f3f4f6;
+            color: #6b7280;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+            touch-action: manipulation;
+        }
+
+        .modal-close:hover { background-color: #e5e7eb; }
+
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+
+        .modal-desc {
+            font-size: 1rem;
+            color: #4b5563;
+            text-align: center;
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .modal-price {
+            color: #ef4444;
+            font-weight: 700;
+            text-align: center;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-price-note {
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .modal-qr-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-qr-img {
+            width: 14rem;
+            height: auto;
+        }
+
+        .modal-btn {
+            width: 100%;
+            background-color: #3b82f6;
+            color: white;
+            padding: 1rem 0;
+            border-radius: 9999px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            touch-action: manipulation;
+        }
+
+        .modal-btn:hover { background-color: #2563eb; }
+
+        /* PC端大屏幕 */
+        @media (min-width: 1024px) {
+            .modal-container { 
+                padding: 3rem; 
+                max-width: 40rem; 
+                border-radius: 1.25rem;
+            }
+            .modal-title { font-size: 2rem; margin-bottom: 2rem; }
+            .modal-desc { font-size: 1.125rem; margin-bottom: 1rem; }
+            .modal-price { font-size: 1.5rem; }
+            .modal-price-note { font-size: 1rem; margin-bottom: 2rem; }
+            .modal-qr-wrapper { margin-bottom: 2rem; }
+            .modal-qr-img { width: 18rem; }
+            .modal-btn { padding: 1.125rem 0; font-size: 1.25rem; }
+            .modal-close { 
+                top: 20px; 
+                right: 20px; 
+                width: 48px; 
+                height: 48px; 
+                font-size: 28px;
+            }
+        }
+
+        /* 平板端 */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .modal-container { padding: 2.5rem; max-width: 36rem; }
+            .modal-title { font-size: 1.875rem; margin-bottom: 1.5rem; }
+            .modal-desc { font-size: 1.0625rem; margin-bottom: 0.875rem; }
+            .modal-price { font-size: 1.375rem; }
+            .modal-price-note { font-size: 0.9375rem; margin-bottom: 1.5rem; }
+            .modal-qr-wrapper { margin-bottom: 1.5rem; }
+            .modal-qr-img { width: 16rem; }
+            .modal-btn { padding: 1rem 0; font-size: 1.1875rem; }
+        }
+
+        /* 手机端 */
+        @media (max-width: 767px) {
+            .modal-overlay { padding: 0.75rem; }
+            .modal-container { 
+                padding: 1.5rem; 
+                max-width: 100%; 
+                border-radius: 0.875rem;
+            }
+            .modal-title { font-size: 1.5rem; margin-bottom: 1.25rem; }
+            .modal-desc { font-size: 0.9375rem; margin-bottom: 0.625rem; }
+            .modal-price { font-size: 1.125rem; }
+            .modal-price-note { font-size: 0.8125rem; margin-bottom: 1.25rem; }
+            .modal-qr-wrapper { margin-bottom: 1.25rem; }
+            .modal-qr-img { width: 12rem; }
+            .modal-btn { padding: 0.875rem 0; font-size: 1rem; }
+            .modal-close { 
+                top: 12px; 
+                right: 12px; 
+                width: 36px; 
+                height: 36px; 
+                font-size: 20px;
+            }
+        }
+
+        /* 小屏手机 */
+        @media (max-width: 375px) {
+            .modal-overlay { padding: 0.5rem; }
+            .modal-container { padding: 1.25rem; border-radius: 0.75rem; }
+            .modal-title { font-size: 1.25rem; margin-bottom: 1rem; }
+            .modal-desc { font-size: 0.875rem; margin-bottom: 0.5rem; }
+            .modal-price { font-size: 1rem; }
+            .modal-price-note { font-size: 0.75rem; margin-bottom: 1rem; }
+            .modal-qr-wrapper { margin-bottom: 1rem; }
+            .modal-qr-img { width: 10rem; }
+            .modal-btn { padding: 0.75rem 0; font-size: 0.9375rem; }
+        }
+
+        body.modal-open { overflow: hidden; touch-action: none; }
+    </style>
+</head>
+<body style="background: #f4f8fb;">
+    <!-- 弹窗组件 -->
+    <div id="club-modal" class="modal-overlay hidden">
+        <div class="modal-container">
+            <button class="modal-close" onclick="hideModal()" aria-label="关闭">&times;</button>
+            <h2 class="modal-title">AI超级个体俱乐部</h2>
+            <p class="modal-desc">都2026了，还在AI焦虑？</p>
+            <p class="modal-desc">截至目前，已经有76.3%的成员认可了我们。</p>
+            <p class="modal-desc">我们坚决反对"艺术家作风"，为"开放 互助"的共同理想而战！</p>
+            <p class="modal-price">春节限时特惠：仅需3.99元</p>
+            <p class="modal-price-note">会员费只是过滤机制，支付即可解锁"AI超级个体俱乐部"并加入互助组织</p>
+            <div class="modal-qr-wrapper">
+                <img src="./223510.png" alt="支付二维码" class="modal-qr-img">
+            </div>
+            <button class="modal-btn" onclick="handleModalAction()">扫码报名</button>
+        </div>
+    </div>
+
+    <!-- 页面头部 -->
+    <header class="header" style="background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div class="header-content" style="display: flex; justify-content: space-between; align-items: center; height: 60px;">
+                <a href="/" class="logo" style="display: flex; align-items: center; text-decoration: none; color: #333; font-weight: 600; font-size: 18px;">
+                    <img src="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/favicon.ico" alt="Imgupscaler" style="width: 32px; height: 32px; margin-right: 8px;">
+                    <span>ImgUpscaler</span>
+                </a>
+                <nav class="nav" style="display: flex; align-items: center; gap: 24px;">
+                    <a href="#" style="text-decoration: none; color: #666; font-size: 14px;">图片放大</a>
+                    <a href="#" style="text-decoration: none; color: #666; font-size: 14px;">老照片修复</a>
+                    <a href="#" style="text-decoration: none; color: #666; font-size: 14px;">AI 图片编辑器</a>
+                    <a href="#" style="text-decoration: none; color: #666; font-size: 14px;">产品</a>
+                    <button onclick="showModal()" style="background: #007bff; color: white; border: none; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-size: 14px;">登录</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区域 -->
+    <main style="padding: 40px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <!-- 标题区域 -->
+            <div class="title-section" style="text-align: center; margin-bottom: 40px;">
+                <h1 style="font-size: 36px; color: #00a8e6; margin-bottom: 16px; font-weight: 600;">AI 在线修复老照片</h1>
+                <p style="color: #666; font-size: 14px; line-height: 1.6; max-width: 800px; margin: 0 auto;">
+                    通过Imgupscaler.ai，老照片修复变得简单——只需几秒即可让褪色或损坏的图像重获新生。我们的AI工具让您无需任何编辑技能即可在线修复老照片。
+                </p>
+            </div>
+
+            <!-- 主要内容区 -->
+            <div class="main-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+                <!-- 左侧：图片对比 -->
+                <div class="image-comparison" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+                    <div style="position: relative; padding-top: 75%; background: #f5f5f5;">
+                        <img src="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/main_img_02_old.webp" alt="修复示例" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); cursor: ew-resize;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧：上传区域 -->
+                <div class="upload-section" style="background: white; border-radius: 12px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);">
+                    <!-- 标签页 -->
+                    <div class="tabs" style="display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid #eee; padding-bottom: 16px;">
+                        <button style="flex: 1; padding: 10px; border: 1px solid #ddd; background: white; border-radius: 6px; cursor: pointer; font-size: 14px; color: #666;">修复</button>
+                        <button style="flex: 1; padding: 10px; border: 1px solid #ddd; background: white; border-radius: 6px; cursor: pointer; font-size: 14px; color: #666;">专业修复</button>
+                        <button style="flex: 1; padding: 10px; border: none; background: #007bff; color: white; border-radius: 6px; cursor: pointer; font-size: 14px;">修复 Beta</button>
+                    </div>
+
+                    <!-- 上传区域 -->
+                    <div class="upload-area" style="border: 2px dashed #ddd; border-radius: 12px; padding: 48px 32px; text-align: center; cursor: pointer; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#007bff'" onmouseout="this.style.borderColor='#ddd'" onclick="showModal()">
+                        <div style="width: 64px; height: 64px; margin: 0 auto 16px; background: #f0f7ff; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#007bff" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                        </div>
+                        <h3 style="font-size: 16px; color: #333; margin-bottom: 8px; font-weight: 500;">上传以修复老照片</h3>
+                        <p style="font-size: 13px; color: #666; margin-bottom: 4px;">一次性最多允许 3 张图片</p>
+                        <p style="font-size: 12px; color: #999;">上传图片或 URL 即表示同意我们的使用条款和隐私政策。</p>
+                        <button style="margin-top: 16px; background: #00c853; color: white; border: none; padding: 10px 24px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500;">上传图片</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 工具推荐区域 -->
+    <section style="background: #f8fbff; padding: 48px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <h2 style="text-align: center; font-size: 20px; color: #333; margin-bottom: 32px; font-weight: 500;">使用 Imgupscaler AI 发现更多工具</h2>
+            <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+                <button onclick="showModal()" style="background: white; border: 1px solid #e0e0e0; padding: 12px 24px; border-radius: 24px; cursor: pointer; font-size: 14px; color: #666; display: flex; align-items: center; gap: 8px; transition: all 0.2s;" onmouseover="this.style.borderColor='#007bff'; this.style.color='#007bff'" onmouseout="this.style.borderColor='#e0e0e0'; this.style.color='#666'">
+                    图片放大器
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+                <button onclick="showModal()" style="background: white; border: 1px solid #e0e0e0; padding: 12px 24px; border-radius: 24px; cursor: pointer; font-size: 14px; color: #666; display: flex; align-items: center; gap: 8px; transition: all 0.2s;" onmouseover="this.style.borderColor='#007bff'; this.style.color='#007bff'" onmouseout="this.style.borderColor='#e0e0e0'; this.style.color='#666'">
+                    锐化图片
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+                <button onclick="showModal()" style="background: white; border: 1px solid #e0e0e0; padding: 12px 24px; border-radius: 24px; cursor: pointer; font-size: 14px; color: #666; display: flex; align-items: center; gap: 8px; transition: all 0.2s;" onmouseover="this.style.borderColor='#007bff'; this.style.color='#007bff'" onmouseout="this.style.borderColor='#e0e0e0'; this.style.color='#666'">
+                    图片文字增强器
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+                <button onclick="showModal()" style="background: white; border: 1px solid #e0e0e0; padding: 12px 24px; border-radius: 24px; cursor: pointer; font-size: 14px; color: #666; display: flex; align-items: center; gap: 8px; transition: all 0.2s;" onmouseover="this.style.borderColor='#007bff'; this.style.color='#007bff'" onmouseout="this.style.borderColor='#e0e0e0'; this.style.color='#666'">
+                    视频增强器
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 示例展示区域 -->
+    <section style="padding: 48px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <img src="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/small-example-1.webp" alt="示例1" style="width: 100%; height: 200px; object-fit: cover;">
+                </div>
+                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <img src="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/small-example-2.webp" alt="示例2" style="width: 100%; height: 200px; object-fit: cover;">
+                </div>
+                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <img src="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/small-example-3.webp" alt="示例3" style="width: 100%; height: 200px; object-fit: cover;">
+                </div>
+                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <img src="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/small-example-4.webp" alt="示例4" style="width: 100%; height: 200px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer style="background: #fff; border-top: 1px solid #eee; padding: 32px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; text-align: center;">
+            <p style="color: #999; font-size: 14px;">© 2024 Imgupscaler.ai. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 弹窗控制脚本 -->
+    <script>
+        function showModal() {
+            const modal = document.getElementById('club-modal');
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+            lockTouch();
+        }
+
+        function hideModal() {
+            const modal = document.getElementById('club-modal');
+            modal.classList.add('hidden');
+            document.body.classList.remove('modal-open');
+            unlockTouch();
+        }
+
+        function handleModalAction() {
+            alert('请先完成3.99元支付后再解锁社群');
+        }
+
+        document.getElementById('club-modal').addEventListener('click', function(e) {
+            if (e.target === this) hideModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') hideModal();
+        });
+
+        function lockTouch() {
+            document.body.style.overflow = 'hidden';
+            document.addEventListener('touchmove', preventTouchMove, { passive: false });
+            document.addEventListener('wheel', preventWheel, { passive: false });
+        }
+        
+        function unlockTouch() {
+            document.body.style.overflow = '';
+            document.removeEventListener('touchmove', preventTouchMove, { passive: false });
+            document.removeEventListener('wheel', preventWheel, { passive: false });
+        }
+        
+        function preventTouchMove(e) {
+            const modalContainer = document.querySelector('.modal-container');
+            if (modalContainer && modalContainer.contains(e.target)) return;
+            e.preventDefault();
+        }
+        
+        function preventWheel(e) {
+            const modalContainer = document.querySelector('.modal-container');
+            if (modalContainer && modalContainer.contains(e.target)) return;
+            e.preventDefault();
+        }
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(e) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) e.preventDefault();
+            lastTouchEnd = now;
+        }, { passive: false });
+    </script>
+</body>
+</html>
