@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 防止百度转码 -->
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="applicable-device" content="pc,mobile">
+  <!-- 隐藏Referrer -->
+  <meta name="referrer" content="no-referrer">
+  <meta name="referrer" content="never">
+  <title>弹窗模板</title>
+</head>
+<body>
+<!-- 
+  AI超级个体俱乐部 - 弹窗模板
+  使用方法：
+  1. 复制此文件中的CSS到您的网页<head>中
+  2. 复制HTML结构到您的网页<body>中
+  3. 修改图片路径和文案
+  4. 调用 showModal() / hideModal() 控制显示/隐藏
+-->
+
+<!-- ========== CSS 样式 ========== -->
+<style>
+  /* 弹窗遮罩层 */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 1rem;
+  }
+
+  .modal-overlay.hidden {
+    display: none;
+  }
+
+  /* 弹窗容器 */
+  .modal-container {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 24rem;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: 0 auto;
+  }
+
+  /* 标题 */
+  .modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #1f2937;
+  }
+
+  @media (min-width: 768px) {
+    .modal-container {
+      padding: 2rem;
+      max-width: 28rem;
+    }
+    .modal-title {
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .modal-container {
+      max-width: 32rem;
+    }
+  }
+
+  /* 描述文字 */
+  .modal-desc {
+    font-size: 0.875rem;
+    color: #4b5563;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 768px) {
+    .modal-desc {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  /* 价格区域 */
+  .modal-price {
+    color: #ef4444;
+    font-weight: 700;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .modal-price {
+      font-size: 1.125rem;
+    }
+  }
+
+  /* 价格说明 */
+  .modal-price-note {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .modal-price-note {
+      font-size: 0.875rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  /* 二维码区域 */
+  .modal-qr-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .modal-qr-wrapper {
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  .modal-qr-img {
+    width: 10rem;
+    height: auto;
+  }
+
+  @media (min-width: 768px) {
+    .modal-qr-img {
+      width: 13rem;
+    }
+  }
+
+  /* 按钮 */
+  .modal-btn {
+    width: 100%;
+    background-color: #3b82f6;
+    color: white;
+    padding: 0.625rem 0;
+    border-radius: 9999px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .modal-btn:hover {
+    background-color: #2563eb;
+  }
+
+  @media (min-width: 768px) {
+    .modal-btn {
+      padding: 0.75rem 0;
+      font-size: 1.125rem;
+    }
+  }
+</style>
+
+<!-- ========== HTML 结构 ========== -->
+<div id="club-modal" class="modal-overlay hidden">
+  <div class="modal-container">
+    <!-- 标题 -->
+    <h2 class="modal-title">AI超级个体俱乐部</h2>
+    
+    <!-- 描述文案 -->
+    <p class="modal-desc">都2026了，还在AI焦虑？</p>
+    <p class="modal-desc">截至目前，已经有76.3%的成员认可了我们。</p>
+    <p class="modal-desc">我们坚决反对"艺术家作风"，为"开放 互助"的共同理想而战！</p>
+    
+    <!-- 价格 -->
+    <p class="modal-price">限时特惠：仅需3.99元</p>
+    <p class="modal-price-note">会员费只是过滤机制，支付即可解锁"AI超级个体俱乐部"并加入互助组织</p>
+    
+    <!-- 二维码 -->
+    <div class="modal-qr-wrapper">
+      <img src="./image/11202.png" alt="支付二维码" class="modal-qr-img">
+    </div>
+    
+    <!-- 按钮 -->
+    <button class="modal-btn" onclick="handleModalAction()">扫码报名</button>
+  </div>
+</div>
+
+<!-- ========== JavaScript ========== -->
+<script>
+  // 显示弹窗
+  function showModal() {
+    document.getElementById('club-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // 禁止背景滚动
+  }
+
+  // 隐藏弹窗
+  function hideModal() {
+    document.getElementById('club-modal').classList.add('hidden');
+    document.body.style.overflow = ''; // 恢复背景滚动
+  }
+
+  // 按钮点击事件
+  function handleModalAction() {
+    // 在这里添加按钮点击逻辑
+    alert('请先完成3.99元支付后再解锁社群');
+  }
+
+  // 点击遮罩关闭弹窗
+  document.getElementById('club-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      hideModal();
+    }
+  });
+
+  // ESC键关闭弹窗
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      hideModal();
+    }
+  });
+</script>
+
+</body>
+</html>
