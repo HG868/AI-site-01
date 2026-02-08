@@ -32,6 +32,133 @@
     <link rel="stylesheet" href="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/default.QMKeKhb6.css">
     <link rel="stylesheet" href="./免费在线老照片修复 _ AI还原褪色和损坏的照片 – Imgupscaler_files/index.BbSQ0fH2.css">
     
+    <!-- 移动端响应式样式 -->
+    <style>
+        /* 基础响应式设置 */
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+        }
+        
+        /* 移动端基础适配 */
+        @media screen and (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+            
+            /* 头部导航移动端适配 */
+            .header-content {
+                flex-wrap: wrap;
+                height: auto !important;
+                padding: 10px 0;
+            }
+            
+            .header-content .nav {
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+                gap: 12px !important;
+            }
+            
+            .header-content .nav a {
+                font-size: 12px !important;
+            }
+            
+            /* 标题区域移动端适配 */
+            .title-section h1 {
+                font-size: 24px !important;
+            }
+            
+            .title-section p {
+                font-size: 13px !important;
+                padding: 0 10px;
+            }
+            
+            /* 主要内容区移动端适配 - 改为单列布局 */
+            .main-content {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+            
+            /* 上传区域移动端适配 */
+            .upload-section {
+                padding: 20px !important;
+            }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .tabs button {
+                flex: 1 1 30% !important;
+                font-size: 12px !important;
+                padding: 8px !important;
+            }
+            
+            .upload-area {
+                padding: 30px 20px !important;
+            }
+            
+            .upload-area h3 {
+                font-size: 14px !important;
+            }
+            
+            /* 工具推荐区域移动端适配 */
+            section .container div {
+                flex-direction: column !important;
+                align-items: center;
+            }
+            
+            section .container div button {
+                width: 80%;
+                justify-content: center;
+            }
+            
+            /* 示例展示区域移动端适配 */
+            section .container > div:last-child {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 10px !important;
+            }
+            
+            section .container > div:last-child > div img {
+                height: 120px !important;
+            }
+        }
+        
+        /* 小屏幕手机适配 */
+        @media screen and (max-width: 480px) {
+            .header-content .nav {
+                display: none !important; /* 小屏幕隐藏导航，可以添加汉堡菜单 */
+            }
+            
+            .title-section h1 {
+                font-size: 20px !important;
+            }
+            
+            .upload-area {
+                padding: 20px 15px !important;
+            }
+            
+            section .container > div:last-child {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        /* 平板适配 */
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            .main-content {
+                gap: 20px !important;
+            }
+            
+            .upload-section {
+                padding: 24px !important;
+            }
+        }
+    </style>
+    
     <!-- 弹窗样式 -->
     <style>
         /* ========== 弹窗组件样式 ========== */
